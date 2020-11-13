@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pingu Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyATBOb-n8Mbnu4hE0OESwkFl18SFs8kPUA",
+        authDomain: "pingubot-17996.firebaseapp.com",
+        databaseURL: "https://pingubot-17996.firebaseio.com",
+        projectId: "pingubot-17996",
+        storageBucket: "pingubot-17996.appspot.com",
+        messagingSenderId: "214486911781",
+        appId: "1:214486911781:web:9a34703726425b5ff128cc"
+    };
+    firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.css" />
+</head>
+<body>
+    <div id="root"></div>
+
+    <template id="appTemplate">
+        <button class="btn" id="logout" onclick="logout()">Logout</button>
+        <main id="app">
+            <h1>Pingu Portal</h1>
+            <div class="grid" id="homeGrid">
+                <div class="grid-header">
+                    <h3>The Team</h3>
+                </div>
+                <div class="grid-item">
+                    <div class="col">
+                        <button class="btn" id="viewMembers">View</button>
+                        <button class="btn" id="manageMembers">Manage</button>
+                    </div>
+                </div>
+
+                <div class="grid-header">
+                    <h3>Files</h3>
+                </div>
+                <div class="grid-item">
+                    <div class="col">
+                        <button class="btn" id="viewFiles">View</button>
+                        <button class="btn" id="manageFiles">Manage</button>
+                        <button class="btn" id="uploadFile">Upload</button>
+                    </div>
+                </div>
+
+                <div class="grid-header">
+                    <h3>Blog</h3>
+                </div>
+                <div class="grid-item">
+                    <div class="col">
+                        <button class="btn" id="viewBlog">View</button>
+                        <button class="btn" id="manageBlog">Manage</button>
+                    </div>
+                </div>
+
+                <div class="grid-header">
+                    <h3>Dev Lounge</h3>
+                </div>
+                <div class="grid-item">
+                    <div class="col">
+                        <button class="btn" id="manageFiles">Maintenance Instructions</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </template>
+
+    <template id="signInTemplate">
+        <main id="app">
+            <div class="col">
+                <h1>Pingu Portal</h1>
+                <div id="firebaseSignInUI"></>
+            </div>
+        </main>
+    </template>
+
+    <script src="auth.js"></script>
+</body>
+</html>
