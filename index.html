@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,70 +16,36 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
 
     <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyATBOb-n8Mbnu4hE0OESwkFl18SFs8kPUA",
-        authDomain: "pingubot-17996.firebaseapp.com",
-        databaseURL: "https://pingubot-17996.firebaseio.com",
-        projectId: "pingubot-17996",
-        storageBucket: "pingubot-17996.appspot.com",
-        messagingSenderId: "214486911781",
-        appId: "1:214486911781:web:9a34703726425b5ff128cc"
-    };
-    firebase.initializeApp(firebaseConfig);
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyATBOb-n8Mbnu4hE0OESwkFl18SFs8kPUA",
+            authDomain: "pingubot-17996.firebaseapp.com",
+            databaseURL: "https://pingubot-17996.firebaseio.com",
+            projectId: "pingubot-17996",
+            storageBucket: "pingubot-17996.appspot.com",
+            messagingSenderId: "214486911781",
+            appId: "1:214486911781:web:9a34703726425b5ff128cc"
+        };
+        firebase.initializeApp(firebaseConfig);
     </script>
 
     <script src="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.css" />
 </head>
+
 <body>
+    <noscript>
+        <main>
+            <h1>JavaScript Disabled</h1>
+            <p>This page requires JavaScript to work properly. Please enable it in your browser settings.</p>
+        </main>
+    </noscript>
+
     <div id="root"></div>
 
     <template id="appTemplate">
-        <button class="btn" id="logout" onclick="logout()">Logout</button>
+        <button class="btn btn-destructive" id="logout">Logout</button>
         <main id="app">
-            <h1>Pingu Portal</h1>
-            <div class="grid" id="homeGrid">
-                <div class="grid-header">
-                    <h3>The Team</h3>
-                </div>
-                <div class="grid-item">
-                    <div class="col">
-                        <button class="btn" id="viewMembers">View</button>
-                        <button class="btn" id="manageMembers">Manage</button>
-                    </div>
-                </div>
-
-                <div class="grid-header">
-                    <h3>Files</h3>
-                </div>
-                <div class="grid-item">
-                    <div class="col">
-                        <button class="btn" id="viewFiles">View</button>
-                        <button class="btn" id="manageFiles">Manage</button>
-                        <button class="btn" id="uploadFile">Upload</button>
-                    </div>
-                </div>
-
-                <div class="grid-header">
-                    <h3>Blog</h3>
-                </div>
-                <div class="grid-item">
-                    <div class="col">
-                        <button class="btn" id="viewBlog">View</button>
-                        <button class="btn" id="manageBlog">Manage</button>
-                    </div>
-                </div>
-
-                <div class="grid-header">
-                    <h3>Dev Lounge</h3>
-                </div>
-                <div class="grid-item">
-                    <div class="col">
-                        <button class="btn" id="manageFiles">Maintenance Instructions</button>
-                    </div>
-                </div>
-            </div>
         </main>
     </template>
 
@@ -86,11 +53,72 @@
         <main id="app">
             <div class="col">
                 <h1>Pingu Portal</h1>
-                <div id="firebaseSignInUI"></>
-            </div>
+                <div id="firebaseSignInUI">
+                    </>
+                </div>
         </main>
     </template>
 
-    <script src="auth.js"></script>
+    <template data-page="root">
+        <h1>Pingu Portal <span class="subtitle">#0006</span></h1>
+        <div class="grid" id="homeGrid">
+            <div class="grid-header">
+                <h3>The Team</h3>
+            </div>
+            <div class="grid-item">
+                <div class="row">
+                    <button class="btn btn-view" id="viewMembers" data-link="viewMembers">View</button>
+                    <button class="btn btn-manage" id="manageMembers">Manage</button>
+                </div>
+            </div>
+
+            <div class="grid-header">
+                <h3>Files</h3>
+            </div>
+            <div class="grid-item">
+                <div class="row">
+                    <button class="btn btn-view" id="viewFiles">View</button>
+                    <button class="btn btn-manage" id="manageFiles">Manage</button>
+                    <button class="btn btn-upload" id="uploadFile">Upload</button>
+                </div>
+            </div>
+
+            <div class="grid-header">
+                <h3>Blog</h3>
+            </div>
+            <div class="grid-item">
+                <div class="row">
+                    <button class="btn btn-view" id="viewBlog">View</button>
+                    <button class="btn btn-manage" id="manageBlog">Manage</button>
+                </div>
+            </div>
+
+            <div class="grid-header">
+                <h3>Dev Lounge</h3>
+            </div>
+            <div class="grid-item">
+                <div class="row">
+                    <button class="btn btn-maintenance" id="maintenanceInstructions">Maintenance Instructions</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template data-page="viewMembers">
+        <section id="viewMembersPage">
+            <h1>Members <button class="subtitle" data-link="root">Pingu</button></h1>
+            <p>Hi! We're a robotics team from the Anglo American School of Moscow. We're a group of curious
+                individuals who are interested in designing, building and programming robots. We're all a
+                bunch of geeks who mess around with CAD software, drills, 3D printers or a bunch of code
+                almost on the daily. Our alliance won the 2020 CEESA Robotics competition in Bucharest. 
+            </p>
+            
+            <h4 id="loadingMembers">Loading members...</h4>
+        </section>
+    </template>
+
+    <script src="app.js" type="module"></script>
 </body>
+
 </html>

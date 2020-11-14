@@ -6,19 +6,22 @@
 /*                                                 Variables                                                */
 /* -------------------------------------------------------------------------------------------------------- */
 :root {
+    --dark-color: 10, 10, 10;
+    --light-color: 245, 245, 245;
     --primary-color-rgb: 75, 75, 228;
     --secondary-color-rgb: 70, 70, 110;
-    --background-color-rgb: 245, 245, 245;
-    --text-color-rgb: 10, 10, 10;
+    --background-color-rgb: var(--light-color);
+    --text-color-rgb: var(--dark-color);
     --button-font-weight: 500;
 }
 
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color-rgb: 10, 10, 10;
-        --text-color-rgb: 245, 245, 245;
+        --background-color-rgb: var(--dark-color);
+        --text-color-rgb: var(--light-color);
         --button-font-weight: 700;
+        --primary-color-rgb: 112, 112, 225;
     }
 }
 
@@ -38,6 +41,11 @@ body {
     font-family: 'Fira Mono', monospace;
 }
 
+::selection {
+    background: rgba(var(--primary-color-rgb), 0.8);
+    color: rgb(var(--background-color-rgb));
+}
+
 
 
 /* -------------------------------------------------------------------------------------------------------- */
@@ -46,10 +54,11 @@ body {
 .btn {
     --color: var(--primary-color-rgb);
     --active-color: var(--secondary-color-rgb);
+    --text-color: var(--background-color-rgb);
     margin: 8px;
     padding: 12px;
     background-color: rgb(var(--color));
-    color: rgb(var(--background-color-rgb));
+    color: rgb(var(--text-color));
     font-size: 1rem;
     font-weight: var(--button-font-weight);
     outline: none;
@@ -77,6 +86,39 @@ body {
     box-shadow: 4px 4px 0 0 rgba(var(--active-color), 0.4);
 }
 
+.btn.btn-view {
+    --active-color: 50, 177, 179;
+}
+
+.btn.btn-manage {
+    --active-color: 82, 182, 80;
+}
+
+.btn.btn-destructive {
+    --active-color: 232, 90, 90;
+}
+
+.btn.btn-upload {
+    --active-color: 207, 143, 41;
+}
+
+.btn.btn-maintenance {
+    --active-color: 223, 98, 131;
+}
+
+@media (prefers-color-scheme: dark) {
+    .btn.btn-view {
+        --active-color: 98, 231, 234;
+    }
+    
+    .btn.btn-manage {
+        --active-color: 114, 214, 89;
+    }
+
+    .btn.btn-upload {
+        --active-color: 208, 157, 74;
+    }
+}
 
 
 /* -------------------------------------------------------------------------------------------------------- */
@@ -86,6 +128,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
     margin-top: 100px;
+    padding: 0 20px;
 }
 
 
@@ -102,12 +145,20 @@ body {
 
 
 /* -------------------------------------------------------------------------------------------------------- */
-/*                                                  Column                                                  */
+/*                                                  Layout                                                  */
 /* -------------------------------------------------------------------------------------------------------- */
 .col {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 
@@ -118,6 +169,18 @@ body {
 h1 {
     font-weight: 700;
     margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+h1 .subtitle {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    appearance: none;
+    color: rgba(var(--text-color-rgb), 0.7);
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .grid {
@@ -166,4 +229,51 @@ h1 {
 
 .firebaseui-idp-button span {
     color: white !important;
+}
+
+
+
+/* -------------------------------------------------------------------------------------------------------- */
+/*                                                 NoScript                                                 */
+/* -------------------------------------------------------------------------------------------------------- */
+noscript {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+noscript main {
+    background-color: rgb(var(--primary-color-rgb));
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+noscript h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+noscript p {
+    margin: 0 20px;
+    max-width: 900px;
+}
+
+
+
+/* -------------------------------------------------------------------------------------------------------- */
+/*                                             View Members Page                                            */
+/* -------------------------------------------------------------------------------------------------------- */
+#viewMembersPage>p {
+    text-align: justify;
+    line-height: 1.7;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    color: rgba(var(--text-color-rgb), 0.8);
+    font-weight: 500;
 }
