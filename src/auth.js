@@ -1,6 +1,6 @@
 function login() {
     var uiConfig = {
-        signInSuccessUrl: window.location.pathname,
+        signInSuccessUrl: `${window.location.pathname}${window.location.hash}`,
         signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.GithubAuthProvider.PROVIDER_ID,
@@ -18,10 +18,11 @@ function logout() {
 }
 
 
-function initAuth(options) {
+function initAuth() {
     const root = document.getElementById('root');
     const appTemplate = document.getElementById('appTemplate').innerHTML;
     const signInTemplate = document.getElementById('signInTemplate').innerHTML;
+    const authObject = new Authenticator();
 
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -29,11 +30,11 @@ function initAuth(options) {
             if (!app) {
                 root.innerHTML = appTemplate;
                 document.getElementById('logout').addEventListener('click', () => {
-                    logout()
+                    logout();
                 })
             }
 
-            options?.onLogin && options.onLogin()
+            authObject.onLogin();
         } else {
             const signInUI = document.getElementById('firebaseSignInUI');
             if (!signInUI) {
@@ -41,10 +42,20 @@ function initAuth(options) {
                 login();
             }
 
-            options?.onLogout && options.onLogout()
+            authObject.onLogout();
         }
-    })
+    });
+
+    return authObject;
 }
 
 
-export { initAuth }
+class Authenticator {
+    constructor() {
+        this.onLogin = () => { };
+        this.onLogout = () => { };
+    }
+}
+
+
+export { initAuth };

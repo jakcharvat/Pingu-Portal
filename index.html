@@ -6,18 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pingu Portal</title>
 
+
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    
+    <!-- Firebase Core -->
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- Firebase Services -->
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
 
+    <!-- Firebase Init Script -->
     <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
+        const firebaseConfig = {
             apiKey: "AIzaSyATBOb-n8Mbnu4hE0OESwkFl18SFs8kPUA",
             authDomain: "pingubot-17996.firebaseapp.com",
             databaseURL: "https://pingubot-17996.firebaseio.com",
@@ -27,6 +30,7 @@
             appId: "1:214486911781:web:9a34703726425b5ff128cc"
         };
         firebase.initializeApp(firebaseConfig);
+        window.db = firebase.firestore();
     </script>
 
     <script src="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.js"></script>
@@ -118,7 +122,8 @@
         </section>
     </template>
 
-    <script src="app.js" type="module"></script>
+    <script src="src/app.js" type="module"></script>
+    <script src="src/firestoreHelpers.js"></script>
 </body>
 
 </html>

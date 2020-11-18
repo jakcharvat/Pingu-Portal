@@ -5,6 +5,9 @@ class Router {
         const pages = document.querySelectorAll('template[data-page]');
         const appElement = document.getElementById('app');
         this.appElement = appElement;
+
+        this.onRouteChanged = _ => { };
+        this.hasShownInitialPage = false;
         
         let pagedict = {};
 
@@ -14,13 +17,15 @@ class Router {
         });
 
         this.pages = pagedict;
-        this.showInitialPage();
-
-        window.addEventListener('hashchange', e => this.onHashChange(e));
     }
 
 
     showInitialPage() {
+        if (this.hasShownInitialPage) { 
+            console.error('Invoking Router.showInitialPage more than once');
+            return;
+        }
+
         const pageId = getHash() || defaultPageIdentifier;
 
         if (pageId && this.pages[pageId]) {
@@ -28,6 +33,8 @@ class Router {
         } else {
             this.appElement.innerHTML = `<h1>No root element provided</h1>`;
         }
+
+        window.addEventListener('hashchange', e => this.onHashChange(e));
     }
 
 
@@ -36,7 +43,7 @@ class Router {
         linkButtons.forEach(button => {
             const target = button.getAttribute('data-link');
             button.addEventListener('click', () => {
-                this.navigateTo(target);
+                window.location.hash = target
             })
         })
     }
@@ -55,6 +62,8 @@ class Router {
             if (!reactingToHashChange) {
                 window.location.hash = page;
             }
+
+            this.onRouteChanged(page);
         } else {
             console.error(`Page ${page} doesn't exist`);
         }
